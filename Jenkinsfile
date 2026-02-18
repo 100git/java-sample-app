@@ -1,6 +1,6 @@
 pipeline{
     agent any
-    tools {maven 'Maven-3.9.6'}
+    tools {maven 'Maven'}
     stages {
         stage('Git Clone'){
             steps {
@@ -19,14 +19,14 @@ pipeline{
                 expression {params.RUN_SONAR}
             }
             environment {
-                scanner = tool 'Sonar'
+                scanner = tool 'SonarScanner'
             }
             steps{
-                withSonarQubeEnv('SonarQubeServer'){
+                withSonarQubeEnv('SonarCloud'){
                     sh '''
-                        ${scanner}/bin/sonar-scanner -Dsonar.projectKey=KloudLabJavaApp \
+                        ${scanner}/bin/sonar-scanner -Dsonar.projectKey=JavaSampleApp \
                         -Dsonar.sources=. \
-                        -Dsonar.projectName=KloudLab \
+                        -Dsonar.projectName=JavaSampleAppProject \
                         -Dsonar.java.binaries=target/
                     '''
                 }
@@ -45,12 +45,12 @@ pipeline{
             steps{
                 script{
                     rtUpload (
-                        serverId: 'artifactory-server',
+                        serverId: 'jfrog-server',
                         spec: '''{
                                     "files": [
                                         {
                                             "pattern": "target/*.jar",
-                                            "target": "kloudlab-generic-local/"
+                                            "target": "java-sample-app-generic-local/"
                                         }
                                     ]
                         }'''
@@ -58,25 +58,6 @@ pipeline{
                 }
             }
         }
-        stage('Deploy'){
-            steps{
-                script{
-                    if(params.Env == 'dev')
-                    {
-                        echo "You have selected dev environment"
-                    }
-                    if(params.Env == 'test')
-                    {
-                        echo "You have selected test environment"
-                    }
-                    if(params.Env == 'prod')
-                    {
-                        echo "You have selected prod environment"
-                    }
-                    print(params.Name)
-                }
-                
-            }
-        }
+        
     }
 }
