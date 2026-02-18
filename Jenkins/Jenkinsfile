@@ -1,0 +1,22 @@
+pipeline {
+  agent any
+
+  parameters{
+   string(name: 'NAME', description: 'Enter yout name', defaultValue: 'Hanuman') 
+  }
+
+  stages{
+    stage('Greetings'){
+      steps{
+        echo "Hello ${params.NAME}, Good Afternoon"
+      
+      }
+    }
+    
+    stage("Bye"){
+        steps{
+            echo "Bye ${params.NAME}, Have a good day"
+        }
+    }
+  }
+}

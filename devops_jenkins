@@ -1,0 +1,39 @@
+pipeline {
+    agent any
+    
+    tools {
+        maven 'Maven3.9.0'
+    }
+    stages{
+        stage('Git Checkout') {
+            steps {
+                git branch: 'main', credentialsId: 'GITHUB_PAT', url: 'https://github.com/DevopsFarmer/java-sample-app.git'
+            }
+        }
+        
+        stage('Maven Build') {
+            steps {
+                sh "mvn clean install"
+            }
+        }
+        
+        stage ('Artifact Publish') {
+            steps {
+                script{
+                rtUpload (
+                    serverId: 'ARTIFACTORY',
+                    spec: '''{
+                             "files": [
+                                {
+                                    "pattern": "target/*.jar",
+                                    "target": "devopsfarmer/Snapshots/${BUILD_NUMBER}/"
+                                }
+                            ]
+                    }''',
+                )
+                
+               }
+             }
+        }
+    }
+}
