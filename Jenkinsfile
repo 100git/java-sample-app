@@ -23,6 +23,7 @@ pipeline{
                     sh '''
                         ${scanner}/bin/sonar-scanner -Dsonar.projectKey=JavaSampleApp \
                         -Dsonar.sources=. \
+                        -Dsonar.organization=rajan-organization \
                         -Dsonar.projectName=JavaSampleAppProject \
                         -Dsonar.java.binaries=target/
                     '''
