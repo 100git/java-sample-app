@@ -15,9 +15,6 @@ pipeline{
         }
 
         stage('Sonar Scanning'){
-            when {
-                expression {params.RUN_SONAR}
-            }
             environment {
                 scanner = tool 'SonarScanner'
             }
