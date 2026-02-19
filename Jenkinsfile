@@ -4,7 +4,7 @@ pipeline{
     stages {
         stage('Git Clone'){
             steps {
-                git branch: 'main', credentialsId: 'github-PAT', url: 'https://github.com/DevopsFarmer/java-sample-app.git'
+                git branch: 'main', url: 'https://github.com/100git/java-sample-app.git'
             }
         }
         
