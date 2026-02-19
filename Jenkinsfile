@@ -69,7 +69,8 @@ pipeline{
                   jf config add myserver \
                     --url=$JF_URL \
                     --access-token=$JF_TOKEN \
-                    --interactive=false
+                    --interactive=false \
+                    --overwrite=true
 
                   jf rt upload "target/*.jar" java-sample-app-generic-local/
                 '''
