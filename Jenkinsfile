@@ -79,11 +79,12 @@ pipeline{
         stage('Xray Scan') {
             steps {
                 sh '''
+                  jf --version
                   jf rt build-collect-env my-build 1
                   jf rt build-add-dependencies my-build 1 "target/*.jar"
                   jf rt build-publish my-build 1
-
-                  jf xr scan-build my-build 1 --fail=true
+                  jf build-scan my-build 1 --fail=true
+                  #jf xr scan-build my-build 1 --fail=true
                 '''
             }
         }        
