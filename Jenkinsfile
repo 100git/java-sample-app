@@ -1,6 +1,9 @@
 pipeline{
     agent any
-    tools {maven 'Maven'}
+    tools {
+        maven 'Maven'
+        jfrog 'jfrog-cli'
+    }
     environment {
         JF_URL = 'https://trial1kaxie.jfrog.io'
         JF_TOKEN = credentials('jfrog-token')
