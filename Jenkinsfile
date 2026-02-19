@@ -31,9 +31,6 @@ pipeline{
             }
         }
         stage('Quality Gate Check'){
-            when {
-                expression {params.RUN_SONAR}
-            }
             steps{
                 waitForQualityGate abortPipeline: true
             }
