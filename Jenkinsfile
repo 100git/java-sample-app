@@ -22,7 +22,7 @@ pipeline{
                 withSonarQubeEnv('SonarCloud'){
                     sh '''
                         ${scanner}/bin/sonar-scanner -Dsonar.projectKey=JavaSampleApp \
-                        -Dsonar.sources=. \
+                        -Dsonar.sources=src \
                         -Dsonar.organization=rajan-organization \
                         -Dsonar.projectName=JavaSampleAppProject \
                         -Dsonar.java.binaries=target/
