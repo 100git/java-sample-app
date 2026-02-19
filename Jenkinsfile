@@ -66,23 +66,23 @@ pipeline{
         stage('Publish Artifact') {
             steps {
                 sh '''
-                  jfrog config add myserver \
+                  jf config add myserver \
                     --url=$JF_URL \
                     --access-token=$JF_TOKEN \
                     --interactive=false
 
-                  jfrog rt upload "target/*.jar" java-sample-app-generic-local/
+                  jf rt upload "target/*.jar" java-sample-app-generic-local/
                 '''
             }
         }        
         stage('Xray Scan') {
             steps {
                 sh '''
-                  jfrog rt build-collect-env my-build 1
-                  jfrog rt build-add-dependencies my-build 1
-                  jfrog rt build-publish my-build 1
+                  jf rt build-collect-env my-build 1
+                  jf rt build-add-dependencies my-build 1
+                  jf rt build-publish my-build 1
 
-                  jfrog xr scan-build my-build 1 --fail=true
+                  jf xr scan-build my-build 1 --fail=true
                 '''
             }
         }        
