@@ -80,7 +80,7 @@ pipeline{
             steps {
                 sh '''
                   jf rt build-collect-env my-build 1
-                  jf rt build-add-dependencies my-build 1
+                  jf rt build-add-dependencies my-build 1 "target/*.jar"
                   jf rt build-publish my-build 1
 
                   jf xr scan-build my-build 1 --fail=true
