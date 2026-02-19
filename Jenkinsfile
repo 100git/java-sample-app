@@ -1,6 +1,11 @@
 pipeline{
     agent any
     tools {maven 'Maven'}
+    environment {
+        JF_URL = 'https://trial1kaxie.jfrog.io'
+        JF_TOKEN = credentials('jfrog-token')
+    }
+    
     stages {
         stage('Git Clone'){
             steps {
@@ -35,6 +40,7 @@ pipeline{
                 waitForQualityGate abortPipeline: true
             }
         }
+        /*
         stage('Artifact Upload')
         {
             steps{
@@ -53,6 +59,29 @@ pipeline{
                 }
             }
         }
-        
+        */
+        stage('Publish Artifact') {
+            steps {
+                sh '''
+                  jfrog config add myserver \
+                    --url=$JF_URL \
+                    --access-token=$JF_TOKEN \
+                    --interactive=false
+
+                  jfrog rt upload "target/*.jar" java-sample-app-generic-local/
+                '''
+            }
+        }        
+        stage('Xray Scan') {
+            steps {
+                sh '''
+                  jfrog rt build-collect-env my-build 1
+                  jfrog rt build-add-dependencies my-build 1
+                  jfrog rt build-publish my-build 1
+
+                  jfrog xr scan-build my-build 1 --fail=true
+                '''
+            }
+        }        
     }
 }
