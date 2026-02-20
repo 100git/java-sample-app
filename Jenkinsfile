@@ -44,7 +44,7 @@ pipeline{
                 waitForQualityGate abortPipeline: true
             }
         }
-        stage('Snyk Security Scan') {
+        /*stage('Snyk Security Scan') {
             environment {
                 SNYK_TOKEN = credentials('snyk-token')
             }
@@ -52,6 +52,17 @@ pipeline{
                 sh '''
                     snyk auth $SNYK_TOKEN
                     snyk test --severity-threshold=high
+                '''
+            }
+        }*/
+        stage('Snyk Security Scan') {
+            environment {
+                SNYK_TOKEN = credentials('snyk-token')
+            }
+            steps {
+                sh '''
+                    snyk test --severity-threshold=high
+                    snyk monitor --project-name=java-sample-app
                 '''
             }
         }
