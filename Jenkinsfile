@@ -17,11 +17,19 @@ pipeline{
             }
         }
         
-        stage('Maven Build'){
+        /*stage('Maven Build'){
             steps{
                 sh 'mvn clean install'
             }
+        }*/
+        stage('Maven Build') {
+            steps {
+                configFileProvider([configFile(fileId: 'artifactory-maven-settings', variable: 'MAVEN_SETTINGS')]) {
+                    sh 'mvn clean install --settings $MAVEN_SETTINGS'
+                }
+            }
         }
+
 
         stage('Sonar Scanning'){
             environment {
