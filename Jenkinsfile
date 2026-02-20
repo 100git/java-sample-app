@@ -3,6 +3,7 @@ pipeline{
     tools {
         maven 'Maven'
         jfrog 'jfrog-cli'
+        snyk 'snyk'
     }
     environment {
         JF_URL = 'https://trial1kaxie.jfrog.io'
