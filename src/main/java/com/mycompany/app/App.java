@@ -11,6 +11,11 @@ public class App
         int b;
         int c;
         int d;
+        String awsAccessKey = "AKIA7EXAMPLE12345678";
+        String awsSecretKey = "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY";
+
+        System.out.println("Access Key: " + awsAccessKey);
+        System.out.println("Secret Key: " + awsSecretKey);
         return first + second;
     }
 
