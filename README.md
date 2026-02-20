@@ -1,5 +1,4 @@
-## 1.0.0
--Project Description
+## 1.0.0 -Project Description
 This repository demonstrates a complete DevSecOps CI/CD pipeline for a Java Maven application.
 The pipeline integrates:
 Jenkins – CI/CD automation
@@ -8,8 +7,7 @@ JFrog Xray – Security & vulnerability scanning
 SonarCloud – Code quality & quality gates
 Snyk – SAST & dependency security
 
-## 1.1.0
-– Assignment Requirements Coverered
+## 1.1.0 – Assignment Requirements Coverered
 - Jenkins installed and configured
 JFrog Artifactory (Local + Remote + Virtual repositories)
 SonarCloud configured with Quality Gates
@@ -49,11 +47,11 @@ Pipeline
 - Type: Maven
 Name: maven-central-remote
 
-## 1.4.2 Local Repository
+## 1.4.2 - Local Repository
 - Type: Generic
 Name: java-sample-app-generic-local
 
-## 1.4.3 Virtual Repository
+## 1.4.3 - Virtual Repository
 - Name: maven-virtual
 includes:
 maven-central-remote
@@ -72,12 +70,24 @@ Added token in Jenkins credentials
 - Installed Snyk CLI in Jenkins
 Added Snyk token as Jenkins credential
 
-## 1.9.0
--JFrog Xray Security Scan
+## 1.8.0 -JFrog Xray Security Scan
 Configured:
 Security Policy (High + Critical)
 Watch attached to repository
 Configured Sonar in Jenkins
-## 1.7.0 – Snyk Security Scan
-- Installed Snyk CLI in Jenkins
-Added Snyk token as Jenkins credential
+
+## 1.9.0 – Failure Conditions Enforced
+- Condition	Result
+Sonar Quality Gate Fail	 Pipeline Aborted
+Snyk High Vulnerability	Pipeline Failed
+Xray High/Critical Issue	Pipeline Failed
+
+## 2.1.0 – Deliverables
+- GitHub repository with source code
+Jenkinsfile with full pipeline
+README with setup steps
+Sonar Quality Gate
+Xray scan results
+Snyk scan results
+Artifact upload
+Dependency resolution from Virtual Repo
