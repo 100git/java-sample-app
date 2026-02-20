@@ -43,6 +43,17 @@ pipeline{
                 waitForQualityGate abortPipeline: true
             }
         }
+        stage('Snyk Security Scan') {
+            environment {
+                SNYK_TOKEN = credentials('snyk-token')
+            }
+            steps {
+                sh '''
+                    snyk auth $SNYK_TOKEN
+                    snyk test --severity-threshold=high
+                '''
+            }
+        }
         /*
         stage('Artifact Upload')
         {
