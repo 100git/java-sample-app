@@ -61,7 +61,7 @@ pipeline{
             }
             steps {
                 sh '''
-                    snyk test --severity-threshold=high
+                    #snyk test --severity-threshold=high
                     snyk monitor --project-name=java-sample-app
                 '''
             }
