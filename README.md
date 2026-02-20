@@ -1,2 +1,2 @@
 # java-sample-app
-Java sample app
+1.0.0
