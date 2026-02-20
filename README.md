@@ -82,7 +82,7 @@ Sonar Quality Gate Fail	 Pipeline Aborted
 Snyk High Vulnerability	Pipeline Failed
 Xray High/Critical Issue	Pipeline Failed
 
-## 2.1.0 – Deliverables
+## 2.0.0 – Deliverables
 - GitHub repository with source code
 Jenkinsfile with full pipeline
 README with setup steps
